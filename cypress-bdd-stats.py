@@ -14,13 +14,18 @@ def count_disabled_tests(feature_directory='./'):
                 with open(os.path.join(root, file), "r") as f:
                     content = f.read()
 
-                    # Use regular expression to find scenarios that are disabled
-                    disabled_scenarios = re.findall(r"@disabled\s*(?:\n\s*@.*?)*\n\s*(Scenario\sOutline:|Scenario:)", content)
+                    # Use regular expression to find scenarios and scenario outlines that are disabled
+                    disabled_scenarios = re.findall(r"@disabled\s*(?:\n\s*@.*?)*\n\s*(Scenario Outline:|Scenario:)", content)
 
-                    # Count the total number of scenarios in the feature file
-                    total_tests += len(re.findall(r"Scenario\sOutline:|Scenario:", content))
+                    # Count the total number of scenarios and scenario outlines in the feature file
+                    total_tests += len(re.findall(r"Scenario Outline:|Scenario:", content))
 
-                    # Count the number of disabled scenarios
+                    # If the scenario is a Scenario Outline, count the number of examples
+                    if "Scenario Outline:" in content:
+                        example_count = len(re.findall(r"Examples:", content))
+                        disabled_tests += example_count
+
+                    # Count individual disabled scenarios
                     disabled_tests += len(disabled_scenarios)
 
     enabled_tests = total_tests - disabled_tests
