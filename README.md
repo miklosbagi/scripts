@@ -3,6 +3,11 @@ Scripts for various tasks
 
 ## docker-multi-nexus
 This is a script to help cloning docker images into nexus with multiple architectures.
+- Usage: `./docker-multi-nexus.sh mongo:6.0.11`
+
+## cypress-bdd-stats
+This is a script to help generate stats from cypress bdd tests.
+- Usage: `./cypress-bdd-stats.py my/step_definitions/this my/step_definitions/that`
 
 ## jwt-tool
 Small util to encode / decode jwt keys to velidate information & create tests.
