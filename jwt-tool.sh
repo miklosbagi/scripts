@@ -12,7 +12,7 @@ function base64url_decode() {
     local result="$1"
     if [ $len -eq 2 ]; then result="$1"==; fi
     if [ $len -eq 3 ]; then result="$1"=; fi
-    echo "$result" | openssl base64 -d -A | tr '-' '+' | tr '_' '/'
+    echo "$result" | openssl base64 -d -A
 }
 
 function encode_jwt() {
